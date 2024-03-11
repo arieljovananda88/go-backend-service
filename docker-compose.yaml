@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  your_server:
+    build: .
+    ports:
+      - 8081:8081
+    hostname: your_server
+    env_file: .env
+    volumes:
+      - ./:/usr/app
+      - /usr/app/db-data
+    restart: always
+    depends_on:
+      - your_db
+  your_db:
+    image: postgres:alpine
+    ports:
+      - ${POSTGRES_PORT}:5432
+    hostname: your_db
+    env_file: .env
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}

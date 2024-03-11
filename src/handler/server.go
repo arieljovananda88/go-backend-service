@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	"go-backend-service/graduit-be/src/middleware"
+	"go-backend-service/src/middleware"
 
 	"github.com/labstack/echo"
 )
@@ -21,7 +21,7 @@ func (s *Service) InitializeRoutes() *echo.Echo {
 
 	//belum ada middleware
 	adminGroup := e.Group("api/admin")
-	adminGroup.Use(middleware.BearerAuth("TIMTA"))
+	adminGroup.Use(middleware.BearerAuth("user_role"))
 	s.AdminSytemLogHandler.MountAdmin(adminGroup)
 	return e
 }

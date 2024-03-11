@@ -30,9 +30,7 @@ func initialize() {
 		panic("failed to connect database")
 	}
 
-	dbInstance.AutoMigrate(&models.Users{})
 	dbInstance.AutoMigrate(&models.SystemLogs{})
-	dbInstance.AutoMigrate(&models.BimbinganLogs{})
 }
 
 func GetInstance() *gorm.DB {
